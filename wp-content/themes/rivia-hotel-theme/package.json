@@ -1,0 +1,37 @@
+{
+  "name": "stomatolog-theme",
+  "version": "1.0.0",
+  "description": "Custom theme development for dental office from Novi Sad",
+  "main": "Gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexdesignSR/stomatolog-filipovic.git"
+  },
+  "author": "Aleksandar Maravic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexdesignSR/stomatolog-filipovic/issues"
+  },
+  "homepage": "https://github.com/alexdesignSR/stomatolog-filipovic#readme",
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.70.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.23.9",
+    "browserify": "^17.0.0",
+    "google-maps": "^3.3.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-iconfont": "^11.0.1",
+    "gulp-iconfont-css": "^2.3.0",
+    "jquery": "^3.7.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  }
+}

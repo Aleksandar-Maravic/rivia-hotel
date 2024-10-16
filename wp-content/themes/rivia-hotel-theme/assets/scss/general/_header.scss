@@ -1,0 +1,36 @@
+.site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 0;
+    z-index: 11;
+    .container {
+        max-width: unset;
+    }
+}
+
+.site-header-inner {
+    position: relative;
+    padding: 10px 0;
+    &::before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        left: 50%;
+        bottom: 0;
+        height: 1px;
+        background-color: $white;
+        transform: translateX(-50%);
+    }
+}
+
+.site-header-logo {
+    width: 120px;
+    display: inline-flex;
+    svg {
+        path {
+            fill: $white;
+        }
+    }
+}

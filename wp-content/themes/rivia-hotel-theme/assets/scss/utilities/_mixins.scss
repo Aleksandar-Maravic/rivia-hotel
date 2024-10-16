@@ -1,0 +1,11 @@
+@mixin min-mq($var) {
+  @media (min-width: #{$var}) {
+    @content;
+  }
+}
+
+@mixin max-mq($var) {
+  @media (max-width: #{$var}) {
+    @content;
+  }
+}
