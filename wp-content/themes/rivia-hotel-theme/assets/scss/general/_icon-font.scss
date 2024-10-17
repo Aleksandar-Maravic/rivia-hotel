@@ -23,38 +23,50 @@
 @function icon-char($filename) {
 	$char: "";
 
-	@if $filename == arrow-left {
+	@if $filename == arrow-left-long {
 		$char: "\E001";
 	}
-	@if $filename == arrow-right {
+	@if $filename == arrow-left {
 		$char: "\E002";
 	}
-	@if $filename == calendar {
+	@if $filename == arrow-right-long {
 		$char: "\E003";
 	}
-	@if $filename == clock {
+	@if $filename == arrow-right {
 		$char: "\E004";
 	}
-	@if $filename == fb {
+	@if $filename == calendar {
 		$char: "\E005";
 	}
-	@if $filename == instagram {
+	@if $filename == clock {
 		$char: "\E006";
 	}
-	@if $filename == link {
+	@if $filename == fb {
 		$char: "\E007";
 	}
-	@if $filename == pin {
+	@if $filename == instagram {
 		$char: "\E008";
 	}
-	@if $filename == play {
+	@if $filename == link {
 		$char: "\E009";
 	}
-	@if $filename == twitter {
+	@if $filename == pin {
 		$char: "\E00A";
 	}
-	@if $filename == zoom {
+	@if $filename == play {
 		$char: "\E00B";
+	}
+	@if $filename == twitter {
+		$char: "\E00C";
+	}
+	@if $filename == volume-off {
+		$char: "\E00D";
+	}
+	@if $filename == volume-on {
+		$char: "\E00E";
+	}
+	@if $filename == zoom {
+		$char: "\E00F";
 	}
 
 	@return $char;
@@ -71,8 +83,14 @@
 	}
 }
 
+.icon-arrow-left-long {
+	@include icon(arrow-left-long);
+}
 .icon-arrow-left {
 	@include icon(arrow-left);
+}
+.icon-arrow-right-long {
+	@include icon(arrow-right-long);
 }
 .icon-arrow-right {
 	@include icon(arrow-right);
@@ -100,6 +118,12 @@
 }
 .icon-twitter {
 	@include icon(twitter);
+}
+.icon-volume-off {
+	@include icon(volume-off);
+}
+.icon-volume-on {
+	@include icon(volume-on);
 }
 .icon-zoom {
 	@include icon(zoom);

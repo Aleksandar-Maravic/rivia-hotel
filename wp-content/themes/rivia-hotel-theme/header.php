@@ -19,12 +19,16 @@
         <div class="container">
             <div class="site-header-inner">
                 <?php if ( $song = get_field('song', 'option') ) : ?>
-                    <audio controls muted loop autoplay>
-                        <source src="<?php echo $song['url']; ?>?t=0.2" type="audio/mp3">
+                    <audio loop playsinline class="js-audio">
+                        <source src="<?php echo $song['url']; ?>" type="audio/mp3">
                     </audio>
+                    <div class="site-header-play-wrapper">
+                        <span class="icon-volume-off js-play"></span>
+                        <span class="icon-volume-on js-pause"></span>
+                    </div>
                 <?php endif; ?>
-                
                 <a href="<?php echo esc_url( home_url('/') ); ?>" rel="home" class="site-header-logo"><?php echo file_get_contents($logo); ?></a>
+                <a href="javascript:;" class="btn-primary">Contact Us</a>
             </div>
         </div>
     </header>

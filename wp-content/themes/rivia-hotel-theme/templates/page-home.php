@@ -9,6 +9,9 @@ get_header();
 	<main id="primary" class="site-main">
 
 		<?php get_template_part( 'template-parts/home/home', 'banner' ); ?>
+		<?php get_template_part( 'template-parts/home/home', 'about-project' ); ?>
+		<?php get_template_part( 'template-parts/home/home', 'about-us' ); ?>
+		<?php get_template_part( 'template-parts/home/home', 'gallery' ); ?>
 
 	</main><!-- #main -->
 

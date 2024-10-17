@@ -1,0 +1,125 @@
+.home-gallery {
+    padding: 100px 0;
+}
+
+.home-gallery-inner {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.home-gallery-cta-wrapper {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.home-gallery-wrapper {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: unset;
+    }
+}
+
+.about-gallery-pretitle {
+    justify-content: center;
+}
+
+.about-gallery-title {
+    text-align: center;
+}
+
+.home-gallery-wrapper-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba($black, 0.6);
+    z-index: 1;
+    min-height: 70px;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    color: $white;
+}
+
+.home-gallery-arrows {
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    padding-right: 10px;
+    flex-direction: column;
+    display: flex;
+
+    .slick-arrow {
+        width: 70px;
+        height: 70px;
+        color: $white;
+        background-color: rgba($black, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        border-radius: 50%;
+        border: 1px solid $white;
+        position: relative;
+        overflow: hidden;
+        &::before {
+            position: absolute;
+            content: '';
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
+            background-color: rgba($white, 0.3);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        &:not(.slick-disabled) {
+            cursor: pointer;
+            &:hover {
+                &::before {
+                    transform: translate(-50%, -50%) scale(1); 
+                }
+            }
+        }
+        span {
+            display: inline-flex;
+            line-height: 1;
+        }
+    }
+}
+
+.home-gallery-item{
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.js-fake-caption {
+    display: none;
+}
+
+.js-gallery-close {
+    text-transform: uppercase;
+    font-family: $secondary-font;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.js-gallery-caption {
+    width: 100%;
+    max-width: 300px;
+}

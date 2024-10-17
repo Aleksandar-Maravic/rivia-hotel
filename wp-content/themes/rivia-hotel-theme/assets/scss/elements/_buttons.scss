@@ -1,0 +1,37 @@
+.btn-primary {
+    position: relative;
+    height: 45px;
+    border: 1px solid $white;
+    color: $white;
+    text-transform: uppercase;
+    padding: 0 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: $secondary-font;
+    letter-spacing: 2px;
+    &.blue {
+        color: $primary-color;
+        border-color: $primary-color;
+        &::before {
+            background-color: rgba($primary-color, 0.2);
+        }
+    }
+    &:hover {
+        &::before {
+            left: 120%;
+        }
+    }
+    &::before {
+        position: absolute;
+        content: '';
+        width: 50px;
+        height: 200%;
+        background-color: rgba($white, 0.2);
+        transform: rotate(35deg);
+        z-index: -1;
+        transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
+        left: -120%;
+    }
+}
