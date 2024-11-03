@@ -1,13 +1,15 @@
 
 # BEGIN WordPress
-# Direktive (redci) između "BEGIN WordPress" i "END WordPress" su
-# dinamički generirani, i trebalo bi ih mijenjati samo koristeći WordPressove filtre.
-# Sve promjene direktiva između navedenih markera bit će prepisane.
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteBase /rivia-hotel/
 RewriteRule ^index\.php$ - [L]
+RewriteRule ^hr/wp-login.php /rivia-hotel/wp-login.php [QSA,L]
+RewriteRule ^en/wp-login.php /rivia-hotel/wp-login.php [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /rivia-hotel/index.php [L]

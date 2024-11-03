@@ -10,8 +10,10 @@ get_header();
 
 		<?php get_template_part( 'template-parts/home/home', 'banner' ); ?>
 		<?php get_template_part( 'template-parts/home/home', 'about-project' ); ?>
+		<?php // get_template_part( 'template-parts/home/home', 'about-project-reverse' ); ?>
 		<?php get_template_part( 'template-parts/home/home', 'about-us' ); ?>
 		<?php get_template_part( 'template-parts/home/home', 'gallery' ); ?>
+		<?php get_template_part( 'template-parts/home/home', 'contact' ); ?>
 
 	</main><!-- #main -->
 

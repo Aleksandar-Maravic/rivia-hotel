@@ -14,12 +14,20 @@
                     </div>
                 <?php endif; ?>
             </div>
-            <?php if ( $video_ap = get_field('video_ap') ) : ?>
-                <div class="about-project-video-wrapper">
-                    <video controls>
-                        <source src="<?php echo $video_ap['url']; ?>" type="video/mp4">
-                    <video>
-                </div>
+            <?php if ( get_field('video_or_image') ) : ?>
+                <?php if ( $video_ap = get_field('video_ap') ) : ?>
+                    <div class="about-project-video-wrapper">
+                        <video controls>
+                            <source src="<?php echo $video_ap['url']; ?>" type="video/mp4">
+                        <video>
+                    </div>
+                <?php endif; ?>
+            <?php else : ?>
+                <?php if ( $image_ap = get_field('image_ap') ) : ?>
+                    <div class="about-project-image-wrapper">
+                        <img src="<?php echo $image_ap['url']; ?>" alt="image of hotel">
+                    </div>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
     </div>

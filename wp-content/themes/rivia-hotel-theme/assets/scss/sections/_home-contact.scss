@@ -1,0 +1,160 @@
+.home-contact {
+    padding: 200px 0;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    @include max-mq($sm) {
+        padding: 70px 0;
+    }
+    &::before {
+        position: absolute;
+        content: '';
+        inset: 0;
+        background-color: rgba($secondary-color, 0.7);
+    }
+}
+
+.home-contact-inner {
+    position: relative;
+    z-index: 2;
+    color: $white;
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.frm_style_formidable-style.with_frm_style .frm_error, .frm_style_formidable-style.with_frm_style .frm_limit_error {
+    color: red;
+    background-color: $white;
+    display: inline-flex;
+    padding: 2px 5px;
+}
+
+.home-contact-pretitle {
+    margin-bottom: 50px;
+    &::before, &::after {
+        background-color: $white;
+    }
+}
+
+.real-submit {
+    display: none;
+}
+
+.contact-form-wrapper {
+    position: fixed;
+    z-index: 1202;
+    top: 50%;
+    inset: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba($secondary-color, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: 0.6s ease;
+    padding: 20px;
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        transform: unset;
+    }
+}
+
+.contact-form-wrapper-inner {
+    width: 100%;
+    max-width: 900px;
+    background-color: $secondary-color;
+    padding: 50px;
+    box-shadow: 0 0 20px rgba($white, 0.3);
+    position: relative;
+    text-align: center;
+    @include max-mq($sm) {
+        padding: 40px 20px;
+    }
+
+    
+    .with_frm_style input[type=text], .with_frm_style input[type=password], .with_frm_style input[type=email], .with_frm_style input[type=number], .with_frm_style input[type=url], .with_frm_style input[type=tel], .with_frm_style input[type=phone], .with_frm_style input[type=search], .with_frm_style select, .with_frm_style textarea, .frm_form_fields_style, .with_frm_style .frm_scroll_box .frm_opt_container, .frm_form_fields_active_style, .frm_form_fields_error_style, .with_frm_style .frm-card-element.StripeElement, .with_frm_style .frm_slimselect.ss-main {
+        border: none !important;
+        border-bottom: 1px solid $white !important;
+        background-color: transparent;
+        border-radius: 0;
+        padding: 17px 24px;
+        color: $white !important;
+        font-family: $secondary-font;
+        &::placeholder {
+            color: $white !important;
+            font-family: $secondary-font;
+        }
+    }
+
+    .frm_style_formidable-style.with_frm_style .frm_blank_field input[type=text], .frm_style_formidable-style.with_frm_style .frm_blank_field input[type=password], .frm_style_formidable-style.with_frm_style .frm_blank_field input[type=url], .frm_style_formidable-style.with_frm_style .frm_blank_field input[type=tel], .frm_style_formidable-style.with_frm_style .frm_blank_field input[type=number], .frm_style_formidable-style.with_frm_style .frm_blank_field input[type=email], .frm_style_formidable-style.with_frm_style .frm_blank_field textarea, .frm_style_formidable-style.with_frm_style .frm_blank_field .mce-edit-area iframe, .frm_style_formidable-style.with_frm_style .frm_blank_field select:not(.ui-datepicker-month):not(.ui-datepicker-year), .frm_form_fields_error_style, .frm_style_formidable-style.with_frm_style .frm_blank_field .frm-g-recaptcha iframe, .frm_style_formidable-style.with_frm_style .frm_blank_field .g-recaptcha iframe, .frm_style_formidable-style.with_frm_style .frm_blank_field .frm-card-element.StripeElement, .frm_style_formidable-style.with_frm_style .frm_form_field :invalid {
+        border: none !important;
+        border-bottom: 1px solid red !important;
+        background-color: transparent;
+    }
+
+    .frm_style_formidable-style.with_frm_style .form-field input:not([type=file]):not([type=range]):not([readonly]):focus, .frm_style_formidable-style.with_frm_style select:focus, .frm_style_formidable-style.with_frm_style textarea:focus, .frm_style_formidable-style.with_frm_style .frm_focus_field input[type=text], .frm_style_formidable-style.with_frm_style .frm_focus_field input[type=password], .frm_style_formidable-style.with_frm_style .frm_focus_field input[type=email], .frm_style_formidable-style.with_frm_style .frm_focus_field input[type=number], .frm_style_formidable-style.with_frm_style .frm_focus_field input[type=url], .frm_style_formidable-style.with_frm_style .frm_focus_field input[type=tel], .frm_style_formidable-style.with_frm_style .frm_focus_field input[type=search], .frm_form_fields_active_style, .frm_style_formidable-style.with_frm_style .frm_focus_field .frm-card-element.StripeElement {
+        box-shadow: unset;
+        border-color: $white !important;
+        color: $white !important;
+        background-color: transparent;
+    }
+
+    .with_frm_style textarea {
+        resize: none;
+        color: $white;
+        &::placeholder {
+            color: $white !important;
+        }
+    }
+
+    .with_frm_style .vertical_radio .frm_checkbox, .with_frm_style .vertical_radio .frm_radio, .vertical_radio .frm_catlevel_1 {
+        display: inline-flex;
+        align-items: center;
+        label {
+            color: $white;
+        }
+        input {
+            margin-top: -2px;
+            border-color: $white;
+        }
+    }
+}
+
+.js-close-form {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    background-color: $secondary-color;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.6s ease;
+    &:hover {
+        background-color: $primary-color;
+    }
+    span {
+        position: absolute;
+        height: 2px;
+        width: calc(100% - 10px);
+        top: 50%;
+        left: 50%;
+        background-color: $white;
+        &:nth-child(1) {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+        &:nth-child(2) {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+    }
+}
+
+.home-contact-cta {
+    // margin-top: 30px;
+}

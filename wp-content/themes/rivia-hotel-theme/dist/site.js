@@ -6,16 +6,22 @@ $ = require("jquery");
 const example = require('./site/example');
 const sound = require('./site/sound');
 const sliders = require('./site/sliders');
+const stickyheader = require('./site/stickyheader');
+const scrollto = require('./site/scrollto');
+const fakesubmit = require('./site/fakesubmit');
 
 jQuery(function () {
 
   example.init();
   sound.init();
   sliders.init();
+  stickyheader.init();
+  scrollto.init();
+  fakesubmit.init();
   
 });
 
-},{"./site/example":2,"./site/sliders":3,"./site/sound":4,"jquery":5}],2:[function(require,module,exports){
+},{"./site/example":2,"./site/fakesubmit":3,"./site/scrollto":5,"./site/sliders":6,"./site/sound":7,"./site/stickyheader":8,"jquery":9}],2:[function(require,module,exports){
 "use strict";
 
 // const Global = require('./global');
@@ -46,6 +52,267 @@ let _this = module.exports = {
 
 };
 },{}],3:[function(require,module,exports){
+"use strict";
+
+// const Global = require('./global');
+
+// let	_this;
+
+let _this = module.exports = {
+
+	
+	/*-------------------------------------------------------------------------------
+		# Cache dom and strings
+	-------------------------------------------------------------------------------*/
+	$dom: {
+		body: $('body')
+    },
+
+    vars: {
+	},
+
+	/*-------------------------------------------------------------------------------
+		# Initialize
+	-------------------------------------------------------------------------------*/
+	init: function () {
+		if( _this ){
+			function triggerFakeClick() {
+                // Get all elements with class 'js-fake-submit'
+                const $fakeSubmitButtons = $('.js-fake-submit');
+            
+                // Iterate through each fake submit button
+                $fakeSubmitButtons.each(function() {
+                    $(this).on('click', function(event) {
+                        event.preventDefault(); // Prevent any default action
+            
+                        // Find the closest parent with the class '.contact-form-wrapper'
+                        const $contactFormWrapper = $(this).closest('.contact-form-wrapper');
+            
+                        if ($contactFormWrapper.length) {
+            
+                            // Within the parent, find the element with class '.frm_button_submit'
+                            const $realSubmitButton = $contactFormWrapper.find('.frm_button_submit');
+            
+                            if ($realSubmitButton.length) {
+                                $realSubmitButton.click();
+                            } else {
+                                console.error('Real submit button not found');
+                            }
+                        } else {
+                            console.error('Contact form wrapper not found');
+                        }
+                    });
+                });
+            }
+            
+            // Call the function to add event listeners on page load
+            $(document).ready(triggerFakeClick);
+		}
+    },
+
+};
+},{}],4:[function(require,module,exports){
+// "use strict";
+const Global = module.exports = {
+	
+	$dom: {
+		window: $(window),
+		body: $('body'),
+		document: $(document)
+	},
+
+	device: {
+		isMobile: false,
+		isTablet: false,
+		isPortable: false,
+		width: window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width,
+		height: window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height,
+	},
+
+	vars: {
+		keys: { 37: 1, 38: 1, 39: 1, 40: 1 },
+		scrollAllowed: [
+			$('.main-navigation')
+		],
+	},
+
+	functions: {
+
+		
+		escKey: function (callback) {
+			$(document).on('keyup', function (e) {
+				if (e.keyCode === 27) {
+					callback();
+				}
+			});
+		},
+
+		clickOutsideContainer: function (selector, container, closeBtn, callback) {
+
+
+			Global.privateFunctions.convertToObject( arguments );
+
+			$(selector).on('mouseup', function (e) {
+				e.preventDefault();
+				if (!container.is(e.target) && container.has(e.target).length === 0 && !$(closeBtn).is( $(e.target) ) ) {
+					callback();
+				}
+			});
+		},
+
+		throttle: function(fn, wait) {
+			
+			var time = Date.now();
+
+			return function() {
+				if ((time + wait - Date.now()) < 0) {
+					fn();
+					time = Date.now();
+				}
+			}
+		},
+	
+		disableScroll: function() {
+			if (window.addEventListener) {
+				window.addEventListener('DOMMouseScroll', Global.privateFunctions.preventDefault, {passive: false});
+			}
+				
+			document.addEventListener('wheel', Global.privateFunctions.preventDefault, {passive: false}); // Disable scrolling in Chrome
+			document.onkeydown  = Global.privateFunctions.preventDefaultForScrollKeys;
+	
+			window.addEventListener('touchmove', Global.privateFunctions.preventDefault, { passive: false });
+			window.addEventListener('mousewheel', Global.privateFunctions.preventDefault, { passive: false });
+			document.addEventListener('mousewheel', Global.privateFunctions.preventDefault, { passive: false });
+			window.addEventListener('wheel', Global.privateFunctions.preventDefault, { passive: false });
+	
+		},
+	
+		enableScroll: function() {
+			if (window.removeEventListener) {
+				window.removeEventListener('DOMMouseScroll', Global.privateFunctions.preventDefault, {passive: false});
+			}
+				
+			document.removeEventListener('wheel', Global.privateFunctions.preventDefault, {passive: false}); // Enable scrolling in Chrome
+	
+			window.removeEventListener('touchmove', Global.privateFunctions.preventDefault, { passive: false });
+			window.removeEventListener('mousewheel', Global.privateFunctions.preventDefault, { passive: false });
+			document.removeEventListener('mousewheel', Global.privateFunctions.preventDefault, { passive: false });
+			window.removeEventListener('wheel', Global.privateFunctions.preventDefault, { passive: false });
+	
+		}
+		
+	},
+
+	privateFunctions: {
+
+		init: function(){
+			Global.privateFunctions.setupSizes();
+			Global.privateFunctions.setupEvents();
+		},
+
+		setupSizes: function(){
+
+			Global.device.width = $(window).outerWidth();
+			Global.device.height = $(window).outerHeight();
+
+			if( Global.device.width <= 1199 && Global.device.width >= 768 ){
+				Global.device.isTablet = true;
+				Global.device.isMobile = false;
+				Global.device.isPortable = true;
+			}
+			else if( Global.device.width >= 1199 ){
+				Global.device.iTablet = false;
+				Global.device.isMobile = false;
+				Global.device.isPortable = false;
+			}
+			else if( Global.device.width < 768 ){
+				Global.device.iTablet = false;
+				Global.device.isMobile = true;
+				Global.device.isPortable = true;
+			}
+
+		},
+		setupEvents: function(){
+			Global.$dom.window.on( 'resize', Global.functions.throttle( this.setupSizes, 200 ) );
+		},
+		convertToObject: function( items ){
+			
+			for( let i = 0; i < items.length; i++ ){
+
+				if( items[i] instanceof Function ) break;
+
+				if( ( items[i] instanceof jQuery ) === false ){
+					items[i] = $(items[i]);
+				}
+			}
+		
+		},
+
+		preventDefault: function(e) {
+
+			for( let allowedElement in Global.vars.scrollAllowed ){
+				let $element = Global.vars.scrollAllowed[allowedElement];
+
+				if( $element.is(e.target) || $element.has( $(e.target) ).length > 0 ){
+					return;
+				}
+			}
+
+			e = e || window.event;
+			if (e.preventDefault)
+				e.preventDefault();
+			e.returnValue = false;  
+		},
+	
+		preventDefaultForScrollKeys: function(e) {
+			if (Global.vars.keys[e.keyCode]) {
+				Global.preventDefault(e);
+				return false;
+			}
+		},
+	}
+};
+
+Global.privateFunctions.init();
+
+},{}],5:[function(require,module,exports){
+"use strict";
+
+// const Global = require('./global');
+
+// let	_this;
+
+let _this = module.exports = {
+
+	
+	/*-------------------------------------------------------------------------------
+		# Cache dom and strings
+	-------------------------------------------------------------------------------*/
+	$dom: {
+		body: $('body')
+    },
+
+    vars: {
+	},
+
+	/*-------------------------------------------------------------------------------
+		# Initialize
+	-------------------------------------------------------------------------------*/
+	init: function () {
+		if( _this ){
+			$('.js-open-contact-form').on('click', function() {
+				$('.contact-form-wrapper').addClass('active');
+				$('body').addClass('overflow-hidden');
+			});
+			$('.js-close-form').on('click', function() {
+				$('.contact-form-wrapper').removeClass('active');
+				$('body').removeClass('overflow-hidden');
+			});
+		}
+    },
+
+};
+},{}],6:[function(require,module,exports){
 "use strict";
 
 require('slick-carousel');
@@ -87,6 +354,14 @@ let _this = module.exports = {
 				$('.js-gallery-caption').text(firstSlideText);
 			});
 
+			$(window).on("load resize orientationchange", function() {
+				if (window.matchMedia("(orientation: portrait)").matches) {
+					$('.js-device-message').show().css('display', 'flex');
+				} else {
+					$('.js-device-message').hide();
+				}
+			});
+
 			_this.$dom.homeHeroSlider.slick({
                 slidesToScroll: 1,
                 slidesToShow: 1,
@@ -94,6 +369,8 @@ let _this = module.exports = {
                 arrows: true,
                 autoplay: false,
                 infinite: false,
+				draggable: false,
+				touchMove: false,
 				rows: 0,
 				prevArrow: "<span type='button' class='slick-prev pull-left'><span class='icon-arrow-left-long'></span></span>",
 			    nextArrow: "<span type='button' class='slick-next pull-right'><span class='icon-arrow-right-long'></span></span>",
@@ -113,7 +390,7 @@ let _this = module.exports = {
     },
 
 };
-},{"slick-carousel":6}],4:[function(require,module,exports){
+},{"slick-carousel":10}],7:[function(require,module,exports){
 "use strict";
 
 // const Global = require('./global');
@@ -152,7 +429,45 @@ let _this = module.exports = {
     },
 
 };
-},{}],5:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
+"use strict";
+
+var Global = require('./global');
+
+// let	_this;
+
+var _this = module.exports = {
+
+	
+	/*-------------------------------------------------------------------------------
+		# Cache dom and strings
+	-------------------------------------------------------------------------------*/
+	$dom: {
+		header: $('.site-header')
+    },
+
+    classes: {
+        sticky: 'sticky-header',
+    },
+
+    vars: {
+        headerOffset: 150,
+	},
+
+	/*-------------------------------------------------------------------------------
+		# Initialize
+	-------------------------------------------------------------------------------*/
+	init: function () {
+        Global.$dom.window.on('scroll', _this.toggleHeaderSticky);
+        Global.$dom.document.ready(_this.toggleHeaderSticky);
+    },
+
+    toggleHeaderSticky: function() {
+        window.pageYOffset >= _this.vars.headerOffset ? _this.$dom.header.addClass( _this.classes.sticky ) : _this.$dom.header.removeClass( _this.classes.sticky );
+    }
+
+};
+},{"./global":4}],9:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.7.1
  * https://jquery.com/
@@ -10870,7 +11185,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{}],6:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*
      _ _      _       _
  ___| (_) ___| | __  (_)___
@@ -13883,4 +14198,4 @@ return jQuery;
 
 }));
 
-},{"jquery":5}]},{},[1]);
+},{"jquery":9}]},{},[1]);

@@ -1,16 +1,16 @@
 .about-us {
     padding: 100px 0;
     background-color: $white;
+    position: relative;
+    @include max-mq($sm) {
+        padding: 70px 0;
+    }
 }
 
 .about-us-inner {
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
-}
-
-.about-us-pretitle {
-    justify-content: center;
 }
 
 .about-us-title {

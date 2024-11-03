@@ -39,6 +39,14 @@ let _this = module.exports = {
 				$('.js-gallery-caption').text(firstSlideText);
 			});
 
+			$(window).on("load resize orientationchange", function() {
+				if (window.matchMedia("(orientation: portrait)").matches) {
+					$('.js-device-message').show().css('display', 'flex');
+				} else {
+					$('.js-device-message').hide();
+				}
+			});
+
 			_this.$dom.homeHeroSlider.slick({
                 slidesToScroll: 1,
                 slidesToShow: 1,
@@ -46,6 +54,8 @@ let _this = module.exports = {
                 arrows: true,
                 autoplay: false,
                 infinite: false,
+				draggable: false,
+				touchMove: false,
 				rows: 0,
 				prevArrow: "<span type='button' class='slick-prev pull-left'><span class='icon-arrow-left-long'></span></span>",
 			    nextArrow: "<span type='button' class='slick-next pull-right'><span class='icon-arrow-right-long'></span></span>",

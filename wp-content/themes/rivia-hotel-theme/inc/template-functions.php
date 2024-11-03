@@ -64,7 +64,7 @@ if( function_exists('acf_add_options_page') ) {
 function my_login_logo() { ?>
     <style type="text/css">
         #login h1 a, .login h1 a {
-            background-image: url(<?php echo get_template_directory_uri() . '/assets/images/logo.webp'; ?>);
+            background-image: url(<?php echo get_template_directory_uri() . '/assets/images/logo-admin.png'; ?>);
 			height: 43px;
 			width: 169px;
 			background-size: contain;
@@ -78,7 +78,11 @@ function my_login_logo() { ?>
 		}
 
 		.login #nav {
-			text-align: center;
+			display: none;
+		}
+
+		.login .wpml-login-ls {
+			display: none;
 		}
 
 		.login #backtoblog {
@@ -86,7 +90,7 @@ function my_login_logo() { ?>
 		}
 
 		body.login {
-			background-color: #f7c42b;
+			background-color: #236192;
 		}
     </style>
 <?php }
@@ -139,5 +143,20 @@ function digwp_disable_gutenberg_for_homepage($is_enabled, $post) {
 }
 
 add_filter('use_block_editor_for_post', 'digwp_disable_gutenberg_for_homepage', 10, 2);
+
+add_action('wp_dashboard_setup', 'wpse_73561_remove_all_dashboard_meta_boxes', 9999 );
+
+function wpse_73561_remove_all_dashboard_meta_boxes() {
+    global $wp_meta_boxes;
+    $wp_meta_boxes['dashboard']['normal']['core'] = array();
+    $wp_meta_boxes['dashboard']['side']['core'] = array();
+}
+
+function remove_dashboard_meta() {
+	remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
+	remove_meta_box( 'wpa_dashboard_widget', 'dashboard', 'side');
+}
+	
+add_action('wp_dashboard_setup', 'remove_dashboard_meta');
 
 ?>
