@@ -20,11 +20,7 @@
     z-index: 1;
     background-color: $white;
     padding: 50px 150px 50px 50px;
-    @include max-mq($lt) {
-        width: 80%;
-        padding: 50px 50px 150px 50px;
-    }
-    @include max-mq($md) {
+    @include max-mq($lg) {
         width: 100%;
         padding: 50px 20px 150px 20px;
     }
@@ -36,13 +32,7 @@
     margin-left: -100px;
     z-index: 1;
     margin-bottom: 50px;
-    @include max-mq($lt) {
-        margin-left: auto;
-        margin-top: -100px;
-        margin-bottom: 0;
-        width: 70%;
-    }
-    @include max-mq($md) {
+    @include max-mq($lg) {
         width: calc(100% - 40px);
         margin: -100px auto 0;
     }
@@ -68,13 +58,7 @@
     margin-left: -100px;
     z-index: 1;
     margin-bottom: 50px;
-    @include max-mq($lt) {
-        margin-left: auto;
-        margin-top: -100px;
-        margin-bottom: 0;
-        width: 70%;
-    }
-    @include max-mq($md) {
+    @include max-mq($lg) {
         width: calc(100% - 40px);
         margin: -100px auto 0;
     }
